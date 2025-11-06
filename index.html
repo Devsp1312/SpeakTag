@@ -11,64 +11,62 @@
 </head>
 <body>
     <div class="container">
-        <main class="card">
-            <div class="animation-container">
-                <div class="waveform-animation"></div>
-            </div>
-            
-            <h1>Return This Item</h1>
-            
-            <div class="welcome-message">
-                <p class="greeting">Hi! I'm a lost item trying to find my owner 👋</p>
-                <p class="reassurance">You can help return it in 30 seconds—no personal info required.</p>
+        <main class="card" role="main">
+            <div class="top">
+                <div class="icon" aria-hidden="true">💬</div>
+                <h1>Return This Item</h1>
+                <p class="lead">Hi — a lost item is trying to find its owner. You can help in 30 seconds. No personal info required.</p>
             </div>
 
-            <button id="startReturn" class="primary-button">Help Return This Item</button>
+            <div class="actions">
+                <button id="startReturn" class="primary-button">Help return this item</button>
+            </div>
 
-            <form id="returnForm" class="hidden">
-                <div class="form-group">
-                    <label for="name">Your Name/Nickname (Optional)</label>
-                    <input type="text" id="name" placeholder="Anonymous Helper">
+            <form id="returnForm" class="form-card hidden" aria-hidden="true">
+                <div class="form-row">
+                    <label for="message">Message to owner</label>
+                    <textarea id="message" placeholder="Where and when you found it (short)" required></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="message">Message to Owner</label>
-                    <textarea id="message" placeholder="Tell them where you found their item..." required></textarea>
+                <div class="form-row small">
+                    <label for="name">Name or nickname (optional)</label>
+                    <input type="text" id="name" placeholder="Anonymous">
                 </div>
 
-                <div class="form-group">
-                    <label class="checkbox-container">
+                <div class="form-row small checkbox-row">
+                    <label>
                         <input type="checkbox" id="shareLocation">
-                        <span class="checkbox-text">Share approximate location (city only)</span>
+                        <span>Share approximate location (city only)</span>
                     </label>
                 </div>
 
-                <div class="form-group">
-                    <label for="contact">Contact for Thank You (Optional)</label>
-                    <input type="text" id="contact" placeholder="Email or phone number">
+                <div class="form-row small">
+                    <label for="contact">Contact (optional)</label>
+                    <input type="text" id="contact" placeholder="Email or phone — optional">
                 </div>
 
-                <div class="privacy-note">
-                    <p>🔒 Your privacy is protected. All messages are relayed through BackHome Labs—no personal details are shared between parties.</p>
-                </div>
+                <p class="privacy-note">🔒 Messages are relayed through BackHome Labs. No personal details are shared between parties.</p>
 
-                <button type="submit" class="primary-button">Send Message</button>
+                <div class="form-actions">
+                    <button type="submit" class="primary-button" id="sendBtn">Send</button>
+                    <button type="button" class="secondary-button" id="cancelBtn">Cancel</button>
+                </div>
             </form>
 
-            <div id="successMessage" class="success-message hidden">
-                <div class="success-animation"></div>
+            <div id="successMessage" class="success-card hidden" role="status" aria-live="polite">
+                <div class="success-emoji">🎉</div>
                 <h2>Thank you!</h2>
                 <p>The owner has been notified.</p>
             </div>
-        </main>
 
-        <footer>
-            <nav>
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#about">About BackHome Labs</a>
-            </nav>
-        </footer>
+            <footer>
+                <nav class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#about">About BackHome Labs</a>
+                </nav>
+            </footer>
+        </main>
     </div>
 
     <script src="public/js/app.js"></script>

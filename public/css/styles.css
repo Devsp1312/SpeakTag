@@ -14,6 +14,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent zoom on input focus on iOS */
+@media screen and (max-width: 768px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
 }
 
 body {
@@ -21,7 +29,12 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    padding: calc(var(--spacing-unit) * 1.25);
+    padding: max(calc(var(--spacing-unit) * 1.25), env(safe-area-inset-top)) 
+             max(calc(var(--spacing-unit) * 1.25), env(safe-area-inset-right))
+             max(calc(var(--spacing-unit) * 1.25), env(safe-area-inset-bottom))
+             max(calc(var(--spacing-unit) * 1.25), env(safe-area-inset-left));
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
 }
 
 .container {
@@ -75,12 +88,18 @@ h1 {
     color: white;
     border: none;
     border-radius: var(--border-radius);
-    padding: 14px 16px;
+    padding: max(16px, 4.5vh) 16px;
     font-size: 16px;
     font-weight: 600;
     width: 100%;
     cursor: pointer;
     transition: background-color 0.2s;
+    /* Improve touch target size on mobile */
+    min-height: 48px;
+    margin: 4px 0;
+    /* Prevent text selection on tap */
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .primary-button:hover {
@@ -128,4 +147,69 @@ textarea { min-height:90px; }
 .hidden { display:none !important; }
 
 /* Focus states for keyboard users */
-button:focus, input:focus, textarea:focus { outline: 3px solid rgba(59,130,246,0.15); outline-offset:2px; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { 
+    outline: 3px solid rgba(59,130,246,0.15); 
+    outline-offset:2px; 
+}
+
+/* Mobile-optimized styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 0;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+
+    .card {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        border-radius: 0;
+        padding: max(16px, 4vh);
+    }
+
+    input, textarea {
+        padding: 14px;
+        margin: 2px 0;
+    }
+    
+    textarea {
+        min-height: 120px;
+    }
+    
+    /* Larger checkbox for mobile */
+    input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+    }
+
+    /* Adjusted spacing for mobile */
+    .form-row {
+        margin-bottom: max(16px, 3vh);
+    }
+
+    .form-actions {
+        position: sticky;
+        bottom: max(16px, env(safe-area-inset-bottom));
+        background: var(--card-background);
+        padding-top: 16px;
+        margin-top: 24px;
+        z-index: 10;
+    }
+
+    /* Larger touch targets */
+    .footer-links {
+        padding: 16px 0;
+        gap: 24px;
+    }
+
+    .footer-links a {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* Success view adjustments */
+    .success-card {
+        padding: max(32px, 8vh) 16px;
+    }
+}
